@@ -9,10 +9,10 @@ You can also download the original datasets of Restaurant domain and Beer domain
 python word2vec.py
 python preprocess.py
 ```
-in code/. The preprocessed files and trained word embeddings for each domain will be saved in a folder preprocessed_data/.
+respectively in code/ . The preprocessed files and trained word embeddings for each domain will be saved in a folder preprocessed_data/.
 
 ## Train
-Go to code/ and type the following command for training:
+Under code/ and type the following command for training:
 ```
 THEANO_FLAGS="device=gpu0,floatX=float32" python train.py \
 --emb ../preprocessed_data/$domain/w2v_embedding \
@@ -24,7 +24,7 @@ where *$domain* in ['restaurant', 'beer'] is the corresponding domain, *--emb* i
 After training, two output files will be saved in code/output_dir/$domain/: 1) *aspect.log* contains extracted aspects with top 100 words for each of them. 2) *model_param* contains the saved model weights
 
 ## Evaluation
-In code/ and type the following command:
+Under code/ and type the following command:
 ```
 THEANO_FLAGS="device=gpu0,floatX=float32" python evaluation.py \
 --domain $domain \
