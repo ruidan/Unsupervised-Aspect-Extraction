@@ -38,6 +38,10 @@ To assign each test sentence a gold aspect label, you need to first manually map
 
 One example of trained model for the restaurant domain has been put in pre_trained_model/restaurant/, and the corresponding aspect mapping has been provided in evaluation.py (line 136-139). You can uncomment line 28 in evaluation.py and run the above command to evaluate the trained model.
 
+## Dependencies
+kears 1.2.1
+theano 0.9.0
+numpy 1.13.3
 
 ## Cite
 If you use the code, please cite the following paper:
@@ -52,6 +56,8 @@ If you use the code, please cite the following paper:
   publisher = {Association for Computational Linguistics}
 }
 ```
+
+
 
 
 
