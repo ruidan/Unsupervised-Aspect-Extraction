@@ -125,7 +125,13 @@ for c in xrange(len(test_x)):
         att_out.write(words[j] + ' '+str(round(weights[j], 3)) + '\n')
 
 
-## cluster_map need to be specified by the user according to the top words in each inferred aspect (save in aspect.log)
+
+######################################################
+# Uncomment the below part for F scores
+######################################################
+
+## cluster_map need to be specified manually according to the top words in each inferred aspect (save in aspect.log)
+
 # map for the pre-trained restaurant model (under pre_trained_model/restaurant)
 # cluster_map = {0: 'Food', 1: 'Miscellaneous', 2: 'Miscellaneous', 3: 'Food',
 #            4: 'Miscellaneous', 5: 'Food', 6:'Price',  7: 'Miscellaneous', 8: 'Staff', 
