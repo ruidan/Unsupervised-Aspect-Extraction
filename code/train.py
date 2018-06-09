@@ -54,7 +54,6 @@ vocab, train_x, test_x, overall_maxlen = dataset.get_data(args.domain, vocab_siz
 train_x = sequence.pad_sequences(train_x, maxlen=overall_maxlen)
 test_x = sequence.pad_sequences(test_x, maxlen=overall_maxlen)
 
-# train_x = train_x[0:30000]
 print 'Number of training examples: ', len(train_x)
 print 'Length of vocab: ', len(vocab)
 
@@ -126,7 +125,8 @@ for w, ind in vocab.items():
 
 sen_gen = sentence_batch_generator(train_x, args.batch_size)
 neg_gen = negative_batch_generator(train_x, args.batch_size, args.neg_size)
-batches_per_epoch = len(train_x) / args.batch_size
+# batches_per_epoch = len(train_x) / args.batch_size
+batches_per_epoch = 1000
 
 min_loss = float('inf')
 for ii in xrange(args.epochs):
