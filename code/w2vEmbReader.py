@@ -61,7 +61,7 @@ class W2VEmbReader:
 
         # L2 normalization
         norm_aspect_matrix = clusters / np.linalg.norm(clusters, axis=-1, keepdims=True)
-        return norm_aspect_matrix
+        return norm_aspect_matrix.astype(np.float32)
     
     def get_emb_dim(self):
         return self.emb_dim
