@@ -1,0 +1,7 @@
+keras==1.2.1
+theano==0.9.0
+numpy==1.13.3
+scikit-learn
+gensim==0.12.4
+tqdm
+h5py
