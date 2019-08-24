@@ -30,7 +30,7 @@ def create_vocab(domain, maxlen=0, vocab_size=0):
                     word_freqs[w] = 1
                 total_words += 1
 
-    print ('   %i total words, %i unique words' % (total_words, unique_words))
+    print( ('   %i total words, %i unique words' % (total_words, unique_words)))
     sorted_word_freqs = sorted(word_freqs.items(), key=operator.itemgetter(1), reverse=True)
 
     vocab = {'<pad>':0, '<unk>':1, '<num>':2}
@@ -41,7 +41,7 @@ def create_vocab(domain, maxlen=0, vocab_size=0):
         if vocab_size > 0 and index > vocab_size + 2:
             break
     if vocab_size > 0:
-        print ('  keep the top %i words' % vocab_size)
+        print( ('  keep the top %i words' % vocab_size))
 
     #Write (vocab, frequence) to a txt file
     vocab_file = codecs.open('../preprocessed_data/%s/vocab' % domain, mode='w', encoding='utf8')
@@ -86,19 +86,19 @@ def read_dataset(domain, phase, vocab, maxlen):
         if maxlen_x < len(indices):
             maxlen_x = len(indices)
 
-    print '   <num> hit rate: %.2f%%, <unk> hit rate: %.2f%%' % (100*num_hit/total, 100*unk_hit/total)
+    print( '   <num> hit rate: %.2f%%, <unk> hit rate: %.2f%%' % (100*num_hit/total, 100*unk_hit/total))
     return data_x, maxlen_x
 
 
 
 def get_data(domain, vocab_size=0, maxlen=0):
-    print 'Reading data from', domain
-    print ' Creating vocab ...'
+    print( 'Reading data from', domain)
+    print( ' Creating vocab ...')
     vocab = create_vocab(domain, maxlen, vocab_size)
-    print ' Reading dataset ...'
-    print '  train set'
+    print( ' Reading dataset ...')
+    print( '  train set')
     train_x, train_maxlen = read_dataset(domain, 'train', vocab, maxlen)
-    print '  test set'
+    print( '  test set')
     test_x, test_maxlen = read_dataset(domain, 'test', vocab, maxlen)
     maxlen = max(train_maxlen, test_maxlen)
     return vocab, train_x, test_x, maxlen
@@ -107,7 +107,7 @@ def get_data(domain, vocab_size=0, maxlen=0):
 
 if __name__ == "__main__":
     vocab, train_x, test_x, maxlen = get_data('restaurant')
-    print len(train_x)
-    print len(test_x)
-    print maxlen
+    print( len(train_x))
+    print( len(test_x))
+    print( maxlen)
 

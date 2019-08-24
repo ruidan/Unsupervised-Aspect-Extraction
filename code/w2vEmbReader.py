@@ -41,7 +41,7 @@ class W2VEmbReader:
     
     def get_emb_matrix_given_vocab(self, vocab, emb_matrix):
         counter = 0.
-        for word, index in vocab.iteritems():
+        for word, index in vocab.items():
             try:
                 emb_matrix[index] = self.embeddings[word]
                 counter += 1
