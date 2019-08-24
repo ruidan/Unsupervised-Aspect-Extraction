@@ -6,15 +6,15 @@ You can find the pre-processed datasets and the pre-trained word embeddings in [
 
 You can also download the original datasets of Restaurant domain and Beer domain in [[Download]](https://drive.google.com/open?id=1qzbTiJ2IL5ATZYNMp2DRkHvbFYsnOVAQ). For preprocessing, put the decompressed zip file in the main folder and run 
 ```
-python word2vec.py
-python preprocess.py
+python3 word2vec.py
+python3 preprocess.py
 ```
 respectively in code/ . The preprocessed files and trained word embeddings for each domain will be saved in a folder preprocessed_data/.
 
 ## Train
 Under code/ and type the following command for training:
 ```
-THEANO_FLAGS="device=gpu0,floatX=float32" python train.py \
+KERAS_BACKEND=theano THEANO_FLAGS="device=gpu0,floatX=float32" python train.py \
 --emb ../preprocessed_data/$domain/w2v_embedding \
 --domain $domain \
 -o output_dir \
@@ -26,7 +26,7 @@ After training, two output files will be saved in code/output_dir/$domain/: 1) *
 ## Evaluation
 Under code/ and type the following command:
 ```
-THEANO_FLAGS="device=gpu0,floatX=float32" python evaluation.py \
+THEANO_FLAGS="device=gpu0,floatX=float32" python3 evaluation.py \
 --domain $domain \
 -o output_dir \
 ```
@@ -40,7 +40,7 @@ One example of trained model for the restaurant domain has been put in pre_train
 
 ## Dependencies
 
-python 2
+python 3
 
 * keras 1.2.1
 * theano 0.9.0
