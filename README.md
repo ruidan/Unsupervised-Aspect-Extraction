@@ -6,8 +6,8 @@ You can find the pre-processed datasets and the pre-trained word embeddings in [
 
 You can also download the original datasets of Restaurant domain and Beer domain in [[Download]](https://drive.google.com/open?id=1qzbTiJ2IL5ATZYNMp2DRkHvbFYsnOVAQ). For preprocessing, put the decompressed zip file in the main folder and run 
 ```
-python word2vec.py
 python preprocess.py
+python word2vec.py
 ```
 respectively in code/ . The preprocessed files and trained word embeddings for each domain will be saved in a folder preprocessed_data/.
 
