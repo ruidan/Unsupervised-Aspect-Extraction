@@ -14,7 +14,7 @@ def create_model(args, maxlen, vocab):
     def ortho_reg(weight_matrix):
         ### orthogonal regularization for aspect embedding matrix ###
         w_n = weight_matrix / K.cast(K.epsilon() + K.sqrt(K.sum(K.square(weight_matrix), axis=-1, keepdims=True)), K.floatx())
-        reg = K.sum(K.square(K.dot(w_n, K.transpose(w_n)) - K.eye(w_n.shape[0].eval())))
+        reg = K.sum(K.square(K.dot(w_n, K.transpose(w_n)) - K.eye(w_n.shape[0])))
         return args.ortho_reg*reg
 
     vocab_size = len(vocab)
@@ -25,7 +25,7 @@ def create_model(args, maxlen, vocab):
 
     ##### Construct word embedding layer #####
     word_emb = Embedding(vocab_size, args.emb_dim, mask_zero=True, name='word_emb')
-
+    print(W)
     ##### Compute sentence representation #####
     e_w = word_emb(sentence_input)
     y_s = Average()(e_w)

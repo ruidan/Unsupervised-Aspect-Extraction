@@ -1,6 +1,6 @@
 import keras.backend as K
 from keras.engine.topology import Layer
-from keras import initializations
+from keras import initializers
 from keras import regularizers
 from keras import constraints
 import numpy as np
@@ -15,7 +15,7 @@ class Attention(Layer):
         Supports Masking.
         """
         self.supports_masking = True
-        self.init = initializations.get('glorot_uniform')
+        self.init = initializers.get('glorot_uniform')
 
         self.W_regularizer = regularizers.get(W_regularizer)
         self.b_regularizer = regularizers.get(b_regularizer)
@@ -31,18 +31,21 @@ class Attention(Layer):
 
         self.steps = input_shape[0][1]
 
-        self.W = self.add_weight((input_shape[0][-1], input_shape[1][-1]),
-                                    initializer=self.init,
-                                    name='{}_W'.format(self.name),
-                                    regularizer=self.W_regularizer,
-                                    constraint=self.W_constraint)
+        self.W = self.add_weight(shape=(input_shape[0][-1], input_shape[1][-1]),
+                                     initializer=self.init,
+                                     name='{}_W'.format(self.name),
+                                     regularizer=self.W_regularizer,
+                                     constraint=self.W_constraint)
+        print(self.W)
+		
         if self.bias:
-            self.b = self.add_weight((1,),
+            self.b = self.add_weight(shape=(1,),
                                      initializer='zero',
                                      name='{}_b'.format(self.name),
                                      regularizer=self.b_regularizer,
                                      constraint=self.b_constraint)
         self.built = True
+        #super(Attention, self).build(input_shape)
 
     def compute_mask(self, input_tensor, mask=None):
         return None
@@ -53,7 +56,7 @@ class Attention(Layer):
         mask = mask[0]
 
         y = K.transpose(K.dot(self.W, K.transpose(y)))
-        y = K.expand_dims(y, dim=-2)
+        y = K.expand_dims(y, -2)
         y = K.repeat_elements(y, self.steps, axis=1)
         eij = K.sum(x*y, axis=-1)
 
@@ -104,7 +107,7 @@ class WeightedAspectEmb(Layer):
                  weights=None, dropout=0., **kwargs):
         self.input_dim = input_dim
         self.output_dim = output_dim
-        self.init = initializations.get(init)
+        self.init = initializers.get(init)
         self.input_length = input_length
         self.dropout = dropout
 
@@ -120,7 +123,7 @@ class WeightedAspectEmb(Layer):
         super(WeightedAspectEmb, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        self.W = self.add_weight((self.input_dim, self.output_dim),
+        self.W = self.add_weight(shape=(self.input_dim, self.output_dim),
                                  initializer=self.init,
                                  name='{}_W'.format(self.name),
                                  regularizer=self.W_regularizer,
@@ -128,6 +131,7 @@ class WeightedAspectEmb(Layer):
 
         if self.initial_weights is not None:
             self.set_weights(self.initial_weights)
+        #super(WeightedAspectEmb, self).build(input_shape)        
         self.built = True
 
     def compute_mask(self, x, mask=None):
@@ -176,11 +180,11 @@ class MaxMargin(Layer):
 
         pos = K.sum(z_s*r_s, axis=-1, keepdims=True)
         pos = K.repeat_elements(pos, steps, axis=-1)
-        r_s = K.expand_dims(r_s, dim=-2)
+        r_s = K.expand_dims(r_s, -2)
         r_s = K.repeat_elements(r_s, steps, axis=1)
         neg = K.sum(z_n*r_s, axis=-1)
 
-        loss = K.cast(K.sum(T.maximum(0., (1. - pos + neg)), axis=-1, keepdims=True), K.floatx())
+        loss = K.cast(K.sum(K.maximum(0., (1. - pos + neg)), axis=-1, keepdims=True), K.floatx())
         return loss
 
     def compute_mask(self, input_tensor, mask=None):

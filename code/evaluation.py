@@ -109,7 +109,7 @@ att_weights, aspect_probs = test_fn([test_x, 0])
 
 ## Save attention weights on test sentences into a file 
 att_out = codecs.open(out_dir + '/att_weights', 'w', 'utf-8')
-print 'Saving attention weights on test sentences...'
+print('Saving attention weights on test sentences...')
 for c in xrange(len(test_x)):
     att_out.write('----------------------------------------\n')
     att_out.write(str(c) + '\n')
@@ -139,7 +139,7 @@ for c in xrange(len(test_x)):
 #            12: 'Ambience', 13: 'Staff'}
 
 
-# print '--- Results on %s domain ---' % (args.domain)
+# print('--- Results on %s domain ---' % (args.domain))
 # test_labels = '../preprocessed_data/%s/test_label.txt' % (args.domain)
 # prediction(test_labels, aspect_probs, cluster_map, domain=args.domain)
 
