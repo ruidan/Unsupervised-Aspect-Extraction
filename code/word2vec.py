@@ -18,7 +18,7 @@ def main(domain):
     model.save(model_file)
 
 
-print 'Pre-training word embeddings ...'
+print('Pre-training word embeddings ...')
 main('restaurant')
 main('beer')
 

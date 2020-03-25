@@ -39,12 +39,12 @@ def preprocess_test(domain):
             out2.write(label+'\n')
 
 def preprocess(domain):
-    print '\t'+domain+' train set ...'
+    print('\t'+domain+' train set ...')
     preprocess_train(domain)
-    print '\t'+domain+' test set ...'
+    print('\t'+domain+' test set ...')
     preprocess_test(domain)
 
-print 'Preprocessing raw review sentences ...'
+print('Preprocessing raw review sentences ...')
 preprocess('restaurant')
 preprocess('beer')
 
